@@ -65,6 +65,7 @@
 				size="large"
 				class="w-full bg-blue-500 tracking-widest"
 				round
+        @click="handleLogin"
 			>
 				{{loginType=='login'?'登录':'注册'}}
 			</Button>
@@ -112,6 +113,7 @@
 				size="large"
 				class="w-full border-slate-950"
 				round
+        @click="handleLogin"
 			>
 				<span class="text-slate-950 w-full tracking-widest">以游客身份登录</span>
 			</Button>
