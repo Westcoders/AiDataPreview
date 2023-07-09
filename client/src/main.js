@@ -4,6 +4,8 @@ import 'normalize.css/normalize.css'
 import 'element-plus/dist/index.css'
 import './styles/style.css'
 import 'element-plus/theme-chalk/dark/css-vars.css'
+import './index.less'
+// import 'tailwindcss'
 import App from './App.vue'
 
 import {auth} from "./auth";

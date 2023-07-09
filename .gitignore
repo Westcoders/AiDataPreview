@@ -2,3 +2,4 @@ docs
 server
 .history
 /*/**/node_modules
+node_modules
