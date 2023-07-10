@@ -1,34 +1,25 @@
 <template>
   <div class="home home-bg">
-    <Login v-if="!isLoggedIn()" @loginSuccess="handleLoginSuccess" />
-  <chatdata v-if="isLoggedIn()" />
+    <Login />
   </div>
 
 </template>
 
 <script>
 import Login from "./Login/Login.vue";
-import chatdata from "./Chatdata.vue";
 
 export default {
   components: {
     Login,
-    chatdata
   },
   methods: {
-    isLoggedIn(){
-      return this.$store.state.auth.status.loggedIn;
-    },
-    handleLoginSuccess() {
-      this.$router.push('/chat');
-    }
   }
 };
 </script>
 <style lang="less">
 .home{
-    height: 100%;
-    width:100%;
+    height: 100vh;
+    width:100vw;
     position: relative;
   &-bg{
     background: #EECDA3;  /* fallback for old browsers */

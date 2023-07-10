@@ -65,7 +65,7 @@
 				size="large"
 				class="w-full bg-blue-500 tracking-widest"
 				round
-        @click="handleLogin"
+        @click="submitLogin"
 			>
 				{{loginType=='login'?'登录':'注册'}}
 			</Button>
@@ -113,7 +113,7 @@
 				size="large"
 				class="w-full border-slate-950"
 				round
-        @click="handleLogin"
+        @click="submitLogin"
 			>
 				<span class="text-slate-950 w-full tracking-widest">以游客身份登录</span>
 			</Button>
@@ -141,8 +141,8 @@ export default {
 		return {
       loginType:'login', // signUp
 			loginForm: {
-				password: '',
-				username: '',
+				password: '123123',
+				username: '1321321',
 			},
 		};
 	},
@@ -156,15 +156,15 @@ export default {
 			this.handleLogin(this.loginForm);
 		},
 		handleLogin(user) {
-			this.$store.dispatch('auth/login', user).then(
-				() => {
-					console.log('Login.vue', user);
-					this.$router.push('/');
-				},
-				(error) => {
-					this.message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString();
-				},
-			);
+      this.$router.push('/workPanel');
+			// this.$store.dispatch('auth/login', user).then(
+			// 	() => {
+			// 		console.log('Login.vue', user);
+			// 	},
+			// 	(error) => {
+			// 		this.message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString();
+			// 	},
+			// );
 		},
 	},
 };

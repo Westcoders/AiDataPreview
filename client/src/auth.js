@@ -10,8 +10,11 @@ export const auth = {
     state: initialState,
     actions: {
         login({commit}, user) {
+            console.log(user);
+
             return login(user).then(
                 user => {
+                    console.log(user);
                     user = localStorage.getItem('user')
                     commit('loginSuccess', user);
                     return Promise.resolve(user);
@@ -66,7 +69,6 @@ export const auth = {
 };
 
 async function login(user) {
-    // await postApi("token", user)
     return postApi("token", user)
         .then((response) => {
             if (response.status == 200) return response.json()
