@@ -142,6 +142,7 @@ import { onMounted, ref } from 'vue'
 import { ElMessage, ElButton, ElInput, ElUpload, ElAvatar, ElCollapse, ElCollapseItem } from 'element-plus';
 import { EditPen, Refresh, Download, Delete, Share, Promotion, UploadFilled, Plus, More, ChatDotRound } from '@element-plus/icons-vue';
 import * as echarts from 'echarts';
+import {loadPdf} from './loadPdf'
 const test = ref(['1'])
 
 const options1 = {
@@ -162,6 +163,7 @@ const options1 = {
 	]
 }
 
+
 const options2 = {
 	xAxis: {
 		data: ['A', 'B', 'C', 'D', 'E']
@@ -172,11 +174,9 @@ const options2 = {
 			data: [10, 22, 28, 23, 19],
 			type: 'line',
 			lineStyle: {
-				normal: {
-					color: 'green',
-					width: 4,
-					type: 'dashed'
-				}
+				color: 'green',
+				width: 4,
+				type: 'dashed'
 			}
 		}
 	]
@@ -244,6 +244,7 @@ onMounted(() => {
 	myChart2.setOption(options2);
 	myChart3.setOption(options4);
 	myChart4.setOption(options5);
+	loadPdf()
 })
 
 </script>
