@@ -1,64 +1,97 @@
 <!-- @format -->
 
 <template>
-	<div class="work-panel flex justify-between bg-slate-200">
+	<div class="work-panel flex text-xs justify-between bg-slate-200">
 		<div class="work-panel-left bg-slate-900 flex flex-col justify-between item px-3">
 			<div class="avator w-full text-white h-16 my-2 flex items-center justify-between">
-				<el-avatar :size="35" src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png" />
+				<div class="flex items-center justify-start">
+					<el-avatar
+						:size="35"
+						src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
+					/>
+					<span class="ml-3 text-s">路飞</span>
+				</div>
 				<el-button link>
-					<el-icon size="large" class=" text-white">
+					<el-icon
+						size="large"
+						class="text-white"
+					>
 						<More />
 					</el-icon>
-
 				</el-button>
 			</div>
-			<el-upload class="upload-demo rounded-md text-sm text-white " drag
-				action="https://run.mocky.io/v3/9d059bf9-4660-45f2-925d-ce80ad6c4d15" multiple>
-				<el-icon size='large' class=" mr-2">
-					<Plus />
-				</el-icon>
-				<span class="">
-					new Chat
-				</span>
-			</el-upload>
 			<div class="flex-auto pr-1 overflow-y-auto scroll-m-0 scroll-ml-1">
-				<ElCollapse v-model="test" class=" text-white border-none tracking-wider break-all">
-					<ElCollapseItem class=" bg-slate-900 text-lg" title="文件目录" name="1">
-						<div class="record  h-10 rounded-md text-white bg-blue-700 px-2 flex items-center justify-center">
-							<el-icon size='large' class=" ">
-								<ChatDotRound />
+				<ElCollapse
+					v-model="test"
+					class="text-white border-none tracking-wider break-all"
+				>
+					<ElCollapseItem
+						class="bg-slate-900"
+						title="文件目录"
+						name="1"
+					>
+						<template #title>
+							<el-icon class="mr-1">
+								<Memo />
 							</el-icon>
-							<div class=" flex-auto ml-2">2021年碳排放数据.pdf</div>
-						</div>
-						<div
-							class="record mt-2 h-10 rounded-md text-white bg-blue-700 px-2 flex items-center justify-center">
-							<el-icon size='large' class=" ">
-								<ChatDotRound />
-							</el-icon>
-							<div class=" flex-auto ml-2">2021年碳排放数据.pdf</div>
+							文件目录
+						</template>
+						<div class="w-full text-xs h-max text-white flex flex-wrap flex-row justify-between">
+							<div
+								v-for="(item, index) in files"
+								:key="item.key"
+								style="width: 176px"
+								class="relative h-6 box-border mx-1 flex-none mt-3 rounded-md bg-blue-900 px-1 flex items-center justify-center"
+							>
+								<div
+									v-if="index > 2"
+									class="w-full z-10 rounded-md h-full bg-slate-700/50 absolute"
+								></div>
+								<el-icon
+									v-if="index < 3"
+									class="z-10 absolute right-1"
+								>
+									<Select />
+								</el-icon>
+								<el-icon>
+									<Document />
+								</el-icon>
+								<div class="flex-auto ml-2">{{ item.name }}</div>
+							</div>
 						</div>
 					</ElCollapseItem>
-					<!-- <ElCollapseItem title="文件目录" name="2">
-
-					</ElCollapseItem> -->
-					<ElCollapseItem title="企业数据" class="" name="3">
-						<div class=" w-full h-full flex items-center justify-center flex-col">
-							<div class="p-0" style="width:350px; height:250px;" id="myChart1"></div>
-							<div class="p-0" style="width:350px; height: 250px;" id="myChart2"></div>
-							<div class="p-0" style="width:350px; height: 250px;" id="myChart3"></div>
-							<div class="p-0" style="width:350px; height: 250px;" id="myChart4"></div>
+					<ElCollapseItem name="3">
+						<template #title>
+							<el-icon class="mr-1">
+								<DataAnalysis />
+							</el-icon>
+							企业数据
+						</template>
+						<div class="w-full h-full flex items-center justify-center flex-col">
+							<div
+								class="p-0"
+								style="width: 350px; height: 250px"
+								id="myChart1"
+							></div>
+							<div
+								class="p-0"
+								style="width: 350px; height: 250px"
+								id="myChart2"
+							></div>
 						</div>
-
 					</ElCollapseItem>
 				</ElCollapse>
-
 			</div>
 		</div>
 
 		<div class="work-panel-center bg-white mx-1 p-3 item">
 			<div class="pdf">
-				<el-upload class="upload-demo mt-5 mx-6" drag
-					action="https://run.mocky.io/v3/9d059bf9-4660-45f2-925d-ce80ad6c4d15" multiple>
+				<el-upload
+					class="upload-demo mt-5 mx-6"
+					drag
+					action="https://run.mocky.io/v3/9d059bf9-4660-45f2-925d-ce80ad6c4d15"
+					multiple
+				>
 					<el-icon class="el-icon--upload"><upload-filled /></el-icon>
 					<div class="el-upload__text">
 						拖入你的文件到这里 或
@@ -75,27 +108,18 @@
 			<div class="chat-header flex justify-between">
 				<div class="title">Chat</div>
 				<div class="actions">
-					<el-button link type="info">
-						<el-icon size="large">
-							<Share />
-						</el-icon>
-					</el-button>
-					<el-button link type="info">
-						<el-icon size="large">
-							<EditPen />
-						</el-icon>
-					</el-button>
-					<el-button link type="info">
-						<el-icon size="large">
-							<Download />
-						</el-icon>
-					</el-button>
-					<el-button link type="info">
+					<el-button
+						link
+						type="info"
+					>
 						<el-icon size="large">
 							<Refresh />
 						</el-icon>
 					</el-button>
-					<el-button link type="info">
+					<el-button
+						link
+						type="info"
+					>
 						<el-icon size="large">
 							<Delete />
 						</el-icon>
@@ -104,28 +128,55 @@
 			</div>
 
 			<div class="chat-content overflow-y-auto flex-auto">
-				<div
-					class="message shadow-lg p-2 mt-5 mr-8 bg-zinc-100 text-slate-800 text-sm tracking-wider break-all rounded-md">
-					欢迎查看程晓杰前端开发的个人简历！ 本文详细介绍了程晓杰的基本信息、工作经历、项目经历、工作技能和���我评价。
-					以下是三个问题供您参考：
+				<div class="message shadow-lg p-2 mt-5 mr-8 bg-zinc-200 text-slate-800 tracking-wider break-all rounded-md">
+					<div class="mt-1">
+						由于红外线的能量较低，不足以导致分子键能的断裂，因此气体分子吸收红外线辐射后没有化学反应发生，而只是阻挡热量自地球向外逃逸，相当于地球和外层空间的一个绝热层，即
+						“温室” 的作用。
+					</div>
+					<div class="mt-1">
+						参考：
+						<ul class="pl-6">
+							<li
+								v-for="item in tips"
+								:key="item.position"
+								class="text-blue-700 list-disc list-outside"
+							>
+								{{ item.desp }}
+							</li>
+						</ul>
+					</div>
 				</div>
 
-				<div
-					class="message shadow-lg p-2 mt-5 ml-8 bg-blue-500 text-white text-sm tracking-wider break-all rounded-md">
-					如何使用？
+				<div class="message shadow-lg p-2 mt-5 ml-8 bg-blue-900 text-white tracking-wider break-all rounded-md">
+					温室气体排放的来源以及影响？
 				</div>
 
-				<div
-					class="message shadow-lg p-2 mt-5 mr-8 bg-zinc-100 text-slate-800 text-sm tracking-wider break-all rounded-md">
-					欢迎查看程晓杰前端开发的个人简历！ 本文详细介绍了程晓杰的基本信息、工作经历、项目经历、工作技能和���我评价。
-					以下是三个问题供您参考：
+				<div class="message shadow-lg p-2 mt-5 mr-8 bg-zinc-200 text-slate-800 tracking-wider break-all rounded-md">
+					<div class="mt-1">
+						温室气体排放来源多为世界重工业发展产生、汽车尾气等，温室气体一旦超出大气标准，便会造成温室效应，使全球气温上升，威胁人类生存。因此，控制温室气体排放已成为全人类面临的一个主要问题。
+					</div>
+					<div class="mt-1">
+						参考：
+						<ul class="pl-6">
+							<li
+								v-for="item in tips"
+								:key="item.position"
+								class="text-blue-700 list-disc list-outside"
+							>
+								{{ item.desp }}
+							</li>
+						</ul>
+					</div>
 				</div>
 			</div>
 
 			<div class="send-message mb-1">
 				<el-input placeholder="Ask any question...">
 					<template #append>
-						<el-button type="primary" class="bg-blue-600">
+						<el-button
+							type="primary"
+							class="bg-blue-600"
+						>
 							<el-icon>
 								<Promotion />
 							</el-icon>
@@ -138,35 +189,61 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from 'vue'
+import { onMounted, ref } from 'vue';
 import { ElMessage, ElButton, ElInput, ElUpload, ElAvatar, ElCollapse, ElCollapseItem } from 'element-plus';
-import { EditPen, Refresh, Download, Delete, Share, Promotion, UploadFilled, Plus, More, ChatDotRound } from '@element-plus/icons-vue';
+import {
+	CircleCheckFilled,
+	Refresh,
+	Memo,
+	Document,
+	Delete,
+	CircleCheck,
+	UploadFilled,
+	Promotion,
+	Select,
+	Plus,
+	More,
+	ChatDotRound,
+	DataAnalysis,
+} from '@element-plus/icons-vue';
 import * as echarts from 'echarts';
-import {loadPdf} from './loadPdf'
-const test = ref(['1'])
+import { loadPdf } from './loadPdf';
+const test = ref(['1']);
+
+const files = [
+	{ name: '2021年碳排放数据.pdf', key: '1' },
+	{ name: '2022年碳排放数据.pdf', key: '2' },
+	{ name: '2023年碳排放数据.pdf', key: '3' },
+	{ name: '碳排放标准.docx', key: '4' },
+	{ name: '全国排放数据.doc', key: '5' },
+];
+const tips = [
+	{ desp: '碳排放权交易管理办法', position: '2' },
+	{ desp: '排放贸易机制、联合履约机制', position: '3' },
+	{ desp: '《全国碳排放权交易配额总量设定与分配实施方案》', position: '1' },
+];
 
 const options1 = {
 	title: {
-		text: '数据1'
+		text: '数据1',
 	},
 	tooltip: {},
 	xAxis: {
-		data: ['衬衫', '羊毛衫', '雪纺衫', '裤子', '高跟鞋', '袜子']
+		data: ['衬衫', '羊毛衫', '雪纺衫', '裤子', '高跟鞋', '袜子'],
 	},
 	yAxis: {},
 	series: [
 		{
 			name: '销量',
 			type: 'bar',
-			data: [5, 20, 36, 10, 10, 20]
-		}
-	]
-}
-
+			data: [5, 20, 36, 10, 10, 20],
+		},
+	],
+};
 
 const options2 = {
 	xAxis: {
-		data: ['A', 'B', 'C', 'D', 'E']
+		data: ['A', 'B', 'C', 'D', 'E'],
 	},
 	yAxis: {},
 	series: [
@@ -176,77 +253,21 @@ const options2 = {
 			lineStyle: {
 				color: 'green',
 				width: 4,
-				type: 'dashed'
-			}
-		}
-	]
-}
-const options3 = {  xAxis: {
-    type: 'category',
-    data: ['A', 'B', 'C']
-  },
-  yAxis: {
-    type: 'value'
-  },
-  series: [
-    {
-      data: [120, 200, 150],
-      type: 'line'
-    }
-  ]}
-
-  const options4 = {
-  series: [
-    {
-      type: 'pie',
-      data: [
-        {
-          value: 335,
-          name: '直接访问'
-        },
-        {
-          value: 234,
-          name: '联盟广告'
-        },
-        {
-          value: 1548,
-          name: '搜索引擎'
-        }
-      ]
-    }
-  ]
+				type: 'dashed',
+			},
+		},
+	],
 };
 
-const options5 = {
-  xAxis: {
-    data: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
-  },
-  yAxis: {},
-  series: [
-    {
-      type: 'scatter',
-      data: [220, 182, 191, 234, 290, 330, 310],
-      symbolSize: function(value) {
-        return value / 10;
-      }
-    }
-  ]
-};
 onMounted(() => {
-
 	// 基于准备好的dom，初始化echarts实例
-	var myChart1 = echarts.init(document.getElementById('myChart1'), '',{height:250,width:350});
-	var myChart2 = echarts.init(document.getElementById('myChart2'), '',{height:250,width:350});
-	var myChart3 = echarts.init(document.getElementById('myChart3'), '',{height:250,width:350});
-	var myChart4 = echarts.init(document.getElementById('myChart4'), '',{height:250,width:350});
+	var myChart1 = echarts.init(document.getElementById('myChart1'), '', { height: 250, width: 350 });
+	var myChart2 = echarts.init(document.getElementById('myChart2'), '', { height: 250, width: 350 });
 	// 绘制图表
 	myChart1.setOption(options1);
 	myChart2.setOption(options2);
-	myChart3.setOption(options4);
-	myChart4.setOption(options5);
-	loadPdf()
-})
-
+	// loadPdf()
+});
 </script>
 
 <style lang="scss">
@@ -254,7 +275,8 @@ onMounted(() => {
 	width: 100vw;
 	height: 100vh;
 
-	.item {}
+	.item {
+	}
 
 	&-left {
 		flex: 0 0 400px;
@@ -269,16 +291,16 @@ onMounted(() => {
 			justify-content: center;
 		}
 
-		.el-collapse{
-			& :first-child{
+		.el-collapse {
+			& :first-child {
 				.el-collapse-item__wrap {
-			--tw-bg-opacity: 1;
-			border: 0;
-			overflow-y: auto;
-			height: max-content;
-			max-height: 200px;
-			background-color: rgb(15 23 42 / var(--tw-bg-opacity));
-		}
+					--tw-bg-opacity: 1;
+					border: 0;
+					overflow-y: auto;
+					height: max-content;
+					max-height: 200px;
+					background-color: rgb(15 23 42 / var(--tw-bg-opacity));
+				}
 			}
 		}
 		.el-collapse-item__header {
