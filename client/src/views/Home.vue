@@ -1,5 +1,6 @@
 <template>
-  <div class="home bg-sky-50 ">
+  <div class="home bg-gray-300 ">
+    <img style="height:100px" src="http://www.akuziti.com/cache/168925186592796.png" alt="">
     <Login />
   </div>
 

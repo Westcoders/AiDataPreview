@@ -155,7 +155,7 @@ export const chart1 = {
           '上海',
           '\n江苏',
           '浙江',
-          '山东',
+          // '山东',
           '广东',
         ],
         splitLine: { show: false }
@@ -185,7 +185,7 @@ export const chart1 = {
   },
   options: [
     {
-      title: { text: '2007全国宏观经济指标' },
+      title: { text: '2007全国宏观碳排放指标' },
       series: [
         { data: dataMap.dataGDP['2007'] },
         { data: dataMap.dataFinancial['2007'] },
@@ -203,7 +203,7 @@ export const chart1 = {
       ]
     },
     {
-      title: { text: '2008全国宏观经济指标' },
+      title: { text: '2008全国宏观碳排放指标' },
       series: [
         { data: dataMap.dataGDP['2008'] },
         { data: dataMap.dataFinancial['2008'] },
@@ -221,7 +221,7 @@ export const chart1 = {
       ]
     },
     {
-      title: { text: '2009全国宏观经济指标' },
+      title: { text: '2009全国宏观碳排放指标' },
       series: [
         { data: dataMap.dataGDP['2009'] },
         { data: dataMap.dataFinancial['2009'] },
@@ -239,7 +239,7 @@ export const chart1 = {
       ]
     },
     {
-      title: { text: '2010全国宏观经济指标' },
+      title: { text: '2010全国宏观碳排放指标' },
       series: [
         { data: dataMap.dataGDP['2010'] },
         { data: dataMap.dataFinancial['2010'] },
@@ -257,7 +257,7 @@ export const chart1 = {
       ]
     },
     {
-      title: { text: '2011全国宏观经济指标' },
+      title: { text: '2011全国宏观碳排放指标' },
       series: [
         { data: dataMap.dataGDP['2011'] },
         { data: dataMap.dataFinancial['2011'] },

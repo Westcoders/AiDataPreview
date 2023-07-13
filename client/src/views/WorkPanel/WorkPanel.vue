@@ -34,7 +34,7 @@
 							<el-icon class="mr-1">
 								<Memo />
 							</el-icon>
-							文件目录
+							我的文件
 						</template>
 						<div class="w-full text-xs h-max text-white flex flex-wrap flex-row justify-between">
 							<div
@@ -65,7 +65,7 @@
 							<el-icon class="mr-1">
 								<DataAnalysis />
 							</el-icon>
-							企业数据
+							行业数据
 						</template>
 						<div class="w-full h-full flex items-center justify-center flex-col">
 							<div
@@ -84,8 +84,46 @@
 			</div>
 		</div>
 
-		<div class="work-panel-center bg-white mx-1 p-3 item">
-			<div class="pdf">
+		<div class="work-panel-center relative overflow-auto bg-white mx-1 p-3 item">
+			<div class="absolute flex justify-between right-3 top-6 w-5 h-32 flex-col items-center">
+								<div>
+					<el-button
+						link
+						type="info"
+					>
+						<el-icon size="large">
+							<Search class="font-bold" />
+						</el-icon>
+					</el-button>
+				</div>
+				<div>
+					<el-button
+						link
+						type="info"
+					>
+						<el-icon size="large">
+							<Plus />
+						</el-icon>
+					</el-button>
+				</div>
+				<div>
+					<el-button
+						link
+						type="info"
+					>
+						<el-icon size="large">
+							<Minus />
+						</el-icon>
+					</el-button>
+				</div>
+
+			</div>
+			<img
+				src="../../assets/pdf2.png"
+				class="mb-6"
+				alt=""
+			/>
+			<div class="h-screen box-border pt-3">
 				<el-upload
 					class="upload-demo mt-5 mx-6"
 					drag
@@ -106,15 +144,21 @@
 
 		<div class="work-panel-right bg-white item flex justify-between flex-col p-3">
 			<div class="chat-header flex justify-between">
-				<div class="title">Chat</div>
+				<div class="title flex items-center">Chat</div>
 				<div class="actions">
+					<div
+						style="right: 45px; top: 14px"
+						class="absolute top-3 z-10 text-sm text-gray-400"
+					>
+						中
+					</div>
 					<el-button
 						link
 						type="info"
 					>
-						<el-icon size="large">
+						<!-- <el-icon size="large">
 							<Refresh />
-						</el-icon>
+						</el-icon> -->
 					</el-button>
 					<el-button
 						link
@@ -192,11 +236,13 @@
 import { onMounted, ref } from 'vue';
 import { ElMessage, ElButton, ElInput, ElUpload, ElAvatar, ElCollapse, ElCollapseItem } from 'element-plus';
 import {
+	Minus,
 	CircleCheckFilled,
 	Refresh,
 	Memo,
 	Document,
 	Delete,
+	Search,
 	CircleCheck,
 	UploadFilled,
 	Promotion,
@@ -208,6 +254,7 @@ import {
 } from '@element-plus/icons-vue';
 import * as echarts from 'echarts';
 import { loadPdf } from './loadPdf';
+import { chart1, chart2 } from './charts';
 const test = ref(['1']);
 
 const files = [
@@ -223,49 +270,13 @@ const tips = [
 	{ desp: '《全国碳排放权交易配额总量设定与分配实施方案》', position: '1' },
 ];
 
-const options1 = {
-	title: {
-		text: '数据1',
-	},
-	tooltip: {},
-	xAxis: {
-		data: ['衬衫', '羊毛衫', '雪纺衫', '裤子', '高跟鞋', '袜子'],
-	},
-	yAxis: {},
-	series: [
-		{
-			name: '销量',
-			type: 'bar',
-			data: [5, 20, 36, 10, 10, 20],
-		},
-	],
-};
-
-const options2 = {
-	xAxis: {
-		data: ['A', 'B', 'C', 'D', 'E'],
-	},
-	yAxis: {},
-	series: [
-		{
-			data: [10, 22, 28, 23, 19],
-			type: 'line',
-			lineStyle: {
-				color: 'green',
-				width: 4,
-				type: 'dashed',
-			},
-		},
-	],
-};
-
 onMounted(() => {
 	// 基于准备好的dom，初始化echarts实例
-	var myChart1 = echarts.init(document.getElementById('myChart1'), '', { height: 250, width: 350 });
-	var myChart2 = echarts.init(document.getElementById('myChart2'), '', { height: 250, width: 350 });
+	var myChart1 = echarts.init(document.getElementById('myChart1'), '', { height: 300, width: 350 });
+	var myChart2 = echarts.init(document.getElementById('myChart2'), '', { height: 300, width: 350 });
 	// 绘制图表
-	myChart1.setOption(options1);
-	myChart2.setOption(options2);
+	myChart1.setOption(chart1);
+	myChart2.setOption(chart2);
 	// loadPdf()
 });
 </script>
